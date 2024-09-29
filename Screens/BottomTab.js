@@ -2,16 +2,16 @@
 import React from 'react';
 import Animated, { View, Image, TouchableOpacity, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../Assert/Shop.png';
-import ExpolreIcon from '../Assert/Search.png';
-import Cart from '../Assert/Cart.png';
+import Home from '../GroceryImage/Shop.png';
+import ExpolreIcon from '../GroceryImage/Explore.png';
+import Cart from '../GroceryImage/Cart.png';
 import FavouriteIcon from '../Assert/Favourite.png';
 import AccountIcon from '../Assert/Account.png';
 import HomeScreen from './HomeScreen';
 import CartScreen from './CartScreen';
 import Account from './Account';
 import Favourite from './Favourite';
-import Expore from './Expore';
+import Expore from '../Screens/Explore';
 const BottomTab = () => {
   const Tab = createBottomTabNavigator();
   return (

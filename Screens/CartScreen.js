@@ -23,7 +23,7 @@ const CartScreen = () => {
     };
     return (
         <>
-            <View style={{ width: width, height: "100%" }} className="flex-1">
+            <View style={{ width: width, height: "100%" }} className="flex-1 bg-white">
                 <View className="flex flex-col items-center justify-center border-b-2 border-[#E2E2E2] h-[10%] shadow-lg">
                     <Text className="text-black text-2xl font-bold">My Cart</Text>
                 </View>
@@ -32,7 +32,7 @@ const CartScreen = () => {
                     renderItem={({ item, index }) => (
                         <View key={index} style={{ height: responsiveScreenHeight(15) }} className="flex flex-row items-center px-3 py-2 justify-between border-b-2  border-[#E2E2E2]">
                             <View className="flex flex-col items-center justify-center w-[25%] h-full">
-                                <Image className="w-[50px] h-[40px]" source={{ uri: item.img }} />
+                                <Image className="w-full h-[60px] object-contain" source={ item.img } />
                             </View>
                             <View className=" flex flex-row items-center justify-between space-y-3 w-[75%] h-full px-3">
                                 <View className=" flex flex-col space-y-3">

@@ -35,7 +35,7 @@ const PlaceOrderComponents = ({ setShowOrder }) => {
     ]
     return (
 
-        <View className="w-full rounded-t-3xl z-50  py-5 bottom-0 h-[500px] bg-white shadow-xl absolute">
+        <View className="w-full rounded-t-3xl z-50  py-5 -bottom-0 h-[500px] bg-red-600 shadow-xl absolute">
             <View className="flex flex-col h-full px-5">
                 <View className=" flex flex-row items-center justify-between py-2">
                     <Text className="text-lg text-black font-semibold">Checkout</Text>
