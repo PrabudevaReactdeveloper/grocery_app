@@ -1,162 +1,114 @@
 
-import React from 'react';
-import Animated, { View, Image, TouchableOpacity, Text } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../GroceryImage/Shop.png';
+import HomeIcon from '../GroceryImage/Shop.png';
 import ExpolreIcon from '../GroceryImage/Explore.png';
-import Cart from '../GroceryImage/Cart.png';
+import CartIcon from '../GroceryImage/Cart.png';
 import FavouriteIcon from '../Assert/Favourite.png';
 import AccountIcon from '../Assert/Account.png';
 import HomeScreen from './HomeScreen';
 import CartScreen from './CartScreen';
-import Account from './Account';
-import Favourite from './Favourite';
-import Expore from '../Screens/Explore';
+import FavouriteScreen from './FavouriteScreen';
+import ExploreScreen from './ExploreScreen';
+import * as Animatable from 'react-native-animatable';
+import { useSelector } from 'react-redux';
+import PlaceOrderComponents from './PlaceOrderComponents';
+import AccountScreen from './AccountScreen';
+
 const BottomTab = () => {
   const Tab = createBottomTabNavigator();
+  const TableArray = [
+    {
+      route: "Home", label: "Home", Icon: HomeIcon, component1: HomeScreen
+    },
+    {
+      route: "Explore", label: "Explore", Icon: ExpolreIcon, component1: ExploreScreen
+    },
+    {
+      route: "Cart", label: "Cart", Icon: CartIcon, component1: CartScreen
+    },
+    {
+      route: "Favourite", label: "Favourite", Icon: FavouriteIcon, component1: FavouriteScreen
+    },
+    {
+      route: "Account", label: "Account", Icon: AccountIcon, component1: AccountScreen
+    },
+  ]
+
+  const animate1 = { 0: { scale: 1.2, translateY: 0 }, 1: { scale: 1.2, translateY: -20 } }
+  const animate2 = { 0: { scale: 1.2, }, 1: { scale: 1.2, } }
+
+  const TabButton = (props) => {
+    const { item, onPress, accessibilityState } = props;
+    const focused = accessibilityState.selected;
+    const viewRef = useRef(null);
+    useEffect(() => {
+      if (focused) {
+        viewRef.current.animate(animate1);
+      } else {
+        viewRef.current.animate(animate2);
+      }
+    }, [focused])
+    return (
+      <TouchableOpacity onPress={() => onPress()} activeOpacity={1} className='w-[20%] bg-white shadow-2xl items-center justify-center'>
+        <Animatable.View ref={viewRef} duration={500} className='w-[45px] h-[45px] rounded-full bg-[#53B175] shadow-2xl border-[#53B175] border-2 items-center justify-center'>
+          <Animatable.View style={{ ...StyleSheet.absoluteFillObject }} />
+          <Image source={item.Icon}
+            style={{
+              width: 20,
+              height: 20,
+              resizeMode: 'contain',
+              tintColor: focused ? '#ffffff' : 'black',
+
+            }} />
+          {/* <Animatable.Text ref={textRef}>
+            {item.label}
+          </Animatable.Text> */}
+        </Animatable.View>
+      </TouchableOpacity>
+    )
+  }
+
+  const showOrder = useSelector((state) => state.User.value);
+
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarShowLabel: false,
-        tabBarHideOnKeyboard: true,
-        tabBarStyle: {
-          height: 60,
-          width: '100%',
-          alignItems: 'center',
-          backgroundColor: "white",
-          opacity: 1,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
-          elevation: 10,
-          justifyContent: "space-between",
-        },
-      }}
-      initialRouteName={"Home"}
-      shifting={false}
-      labeled={false}
-    >
-      <Tab.Screen
-        options={{
+    <>
+      <Tab.Navigator
+        screenOptions={{
           tabBarShowLabel: false,
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View className='w-full h-full items-center justify-center '>
-              <Image
-                source={Home}
-                style={{
-                  width: 20,
-                  height: 20,
-                  resizeMode: 'contain',
-                  tintColor: focused ? '#53B175' : 'black',
-                }} />
-              <Text style={{ color: focused ? '#53B175' : 'black' }}>Shop</Text>
-            </View>
-          ),
+          tabBarHideOnKeyboard: false,
+          tabBarStyle: {
+            height: 60,
+            width: '100%',
+            alignItems: 'center',
+            opacity: 1,
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
+            elevation: 10,
+            justifyContent: "space-between",
+          },
         }}
-        name="Home"
-        component={HomeScreen}
-      />
+        initialRouteName={"Home"}
 
-      <Tab.Screen
-        options={{
-          tabBarColor: 'red',
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View className='w-full h-full items-center justify-center  gap-1'>
-              <Image
-                source={ExpolreIcon}
-                style={{
-                  width: 20,
-                  height: 20,
-                  resizeMode: 'contain',
-                  tintColor: focused ? '#53B175' : 'black',
-                }} />
-              <Text style={{ color: focused ? '#53B175' : 'black', }}>Expolre</Text>
-            </View>
-          ),
-        }}
-        name="Explore"
-        component={Expore}
-      />
-      <Tab.Screen
-        options={{
-          tabBarColor: 'red',
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View className='w-full h-full items-center justify-center '>
-              <Image
-                source={Cart}
-                style={{
-                  width: 20,
-                  height: 20,
-                  resizeMode: 'contain',
-                  tintColor: focused ? '#53B175' : 'black',
-                }} />
-              <Text style={{ color: focused ? '#53B175' : 'black', }}>Cart</Text>
-            </View>
-          ),
-        }}
-        name="Cart"
-        component={CartScreen}
-      />
-      <Tab.Screen
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View className='w-full h-full items-center justify-center'>
-
-              <Image
-                source={FavouriteIcon}
-                style={{
-                  width: 20,
-                  height: 20,
-                  resizeMode: 'contain',
-                  tintColor: focused ? '#53B175' : 'black',
-                }} />
-              <Text style={{ color: focused ? '#53B175' : 'black', }}>Favourite</Text>
-            </View>
-          ),
-        }}
-        name="Favourite"
-        component={Favourite}
-      />
-      <Tab.Screen
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View className='w-full h-full items-center justify-center'>
-              <Image
-                source={AccountIcon}
-                style={{
-                  width: 20,
-                  height: 20,
-                  resizeMode: 'contain',
-                  tintColor: focused ? '#53B175' : 'black',
-                }} />
-              <Text style={{ color: focused ? '#53B175' : 'black' }}>Account</Text>
-            </View>
-          ),
-        }}
-        name="Account"
-        component={Account}
-      />
-    </Tab.Navigator>
+      >
+        {TableArray.map((item, index) =>
+          <Tab.Screen key={index}
+            name={item.route}
+            component={item.component1}
+            options={{
+              tabBarShowLabel: false,
+              headerShown: false,
+              tabBarButton: (props) => <TabButton {...props} item={item} />
+            }}
+          />
+        )}
+      </Tab.Navigator>
+      {
+        showOrder ? <PlaceOrderComponents /> : null
+      }
+    </>
   );
 };
 export default BottomTab;
 
-
-{/* <Tab.Screen
-options={{
-  headerShown: false,
-  tabBarIcon: ({ focused }) => (
-    <View className="w-[85%] h-[60px] items-center justify-center absolute rounded-full">
-      <Image className="w-full h-full rounded-full object-contain"
-        source={Cart} x
-      />
-    </View>
-  ),
-}}
-name="InitialLocationScreen"
-component={HomeScreen}
-/> */}

@@ -7,8 +7,8 @@ const ButtonComponent = (props) => {
 
     return (
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate(props.route)} className="bg-[#53B175] flex flex-col items-center justify-center h-14 rounded-3xl" >
-                <Text className="text-white font-bold text-base">{props.title}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate(props.route)} className="bg-[#53B175] flex flex-col items-center justify-center h-[67px] rounded-xl" >
+                <Text  className="text-white font-bold text-base font-PoppinsSemiBold">{props.title}</Text>
             </TouchableOpacity>
         </View>
     )

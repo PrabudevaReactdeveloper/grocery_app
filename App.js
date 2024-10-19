@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Provider } from 'react-redux';
-import RouteCompent from './Screens/RouteCompent';
+import RoutingComponent from './Screens/RoutingComponent';
 import { store } from "./Redux/store";
 
 const App = () => {
   return (
     <Provider store={store}>
-      <RouteCompent />
+      <RoutingComponent />
     </Provider>
   )
 }

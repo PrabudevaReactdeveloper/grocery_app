@@ -50,18 +50,5 @@ export const ExploreData = [
         color:"#edf7fc",
         borderColor:"#B7DFF5",
     },
-    {
-        id: 7,
-        name: "Dairy & Eggs",
-        image: FruitsProduct5,
-        color:"#fef8e5",
-        borderColor:"#FDE598",
-    },
-    {
-        id: 8,
-        name: "Beverages",
-        image: FruitsProduct4,
-        color:"#edf7fc",
-        borderColor:"#B7DFF5",
-    },
+
 ]

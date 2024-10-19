@@ -1,14 +1,14 @@
-import { View, Text, Image, Dimensions } from 'react-native'
+import { Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 const ProductCart = (props) => {
-    const { width } = Dimensions.get("window");
-
+    const nav = useNavigation();
     return (
-        <View style={{ backgroundColor: props.color, borderColor: props.borderColor}} className="flex flex-col items-center justify-center space-y-5 border flex-1 p-3 rounded-2xl h-48">
+        <TouchableOpacity  style={{ backgroundColor: props.color, borderColor: props.borderColor }} className="flex flex-col border-2 items-center justify-center space-y-5  flex-1 p-3 rounded-2xl h-48">
             <Image source={props.image} />
-            <Text className="text-lg text-[#181725] text-center font-medium">{props.name}</Text>
-        </View>
+            <Text className="text-lg text-[#181725] text-center font-PoppinsMedium">{props.name}</Text>
+        </TouchableOpacity>
     )
 }
 
