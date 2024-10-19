@@ -7,14 +7,10 @@ const FavoriteSlice = createSlice({
         AddToFavoriteCart: (state, action) => {
             let isAvailable1 = state.find((e) => e == action.payload.name);
             if (isAvailable1) {
-                action.payload["quantity"] += 1;
-                console.log( action.payload["quantity"] += 1);
-                
+                action.payload["quantity"] += 1;   
             }
             else {
                 state.push({ ...action.payload, quantity: 1 });
-                console.log(state.push({ ...action.payload, quantity: 1 }));
-
             }
         },
         RemoveFavoriteCart: (state, action) => {
@@ -28,7 +24,6 @@ const FavoriteSlice = createSlice({
             }
             else {
                 console.log("Alert");
-
             }
         },
         DecrementFavoriteQuantity: (state, action) => {

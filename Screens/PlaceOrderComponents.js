@@ -78,14 +78,14 @@ import { PlaceOrder } from '../Redux/UserSlice';
 const PlaceOrderComponents = () => {
     const dispatch = useDispatch();
     const UseData = useSelector((state) => state.CartScreenReducer);
-    console.log(UseData);
+    // console.log(UseData);
 
     const TotalAmount = () => {
         let temp = 0
         let TotalCount = UseData.forEach(element => {
             temp += Number(element.price) * element.quantity
         });
-        console.log(TotalCount);
+        // console.log(TotalCount);
         return temp
     }
     const Checkout = [
@@ -119,7 +119,7 @@ const PlaceOrderComponents = () => {
     return (
 
         <Animated.View entering={FadeInDown.damping(2)} className='flex flex-col justify-end h-full bg-black/60 w-full absolute'>
-            <View className="flex flex-col h-[60%] bg-white rounded-t-3xl py-5">
+            <View className="flex flex-col h-[62%] bg-white rounded-t-3xl py-5">
                 <View className=" flex flex-row items-center justify-between border-b-2 border-[#E2E2E2] px-5 py-3 pb-5">
                     <Text className="text-2xl text-[#181725] font-PoppinsSemiBold">Checkout</Text>
                     <TouchableOpacity onPress={() => dispatch(PlaceOrder(0))}>

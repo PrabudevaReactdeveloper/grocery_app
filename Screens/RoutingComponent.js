@@ -11,6 +11,7 @@ import GetStartScreen from './GetStartScreen';
 import LoginScreen from './LoginScreen';
 import MapViewScreen from './MapScreen';
 import OrderScreen from './OrderScreen';
+import Bottom from './Bottom';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +31,7 @@ const RoutingComponent = () => {
                 <Stack.Navigator initialRouteName='Bottom'>
                     <Stack.Screen name="GetStart" component={GetStartScreen} options={{ headerShown: false }} />
                     <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="Bottom" component={BottomTab} options={{ headerShown: false }} />
+                    <Stack.Screen name="Bottom" component={Bottom} options={{ headerShown: false }} />
                     <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={{ headerShown: false, animation: "slide_from_bottom" }} />
                     <Stack.Screen name="MapScreen" component={MapViewScreen} options={{ headerShown: false, animation: "slide_from_bottom" }} />
                     <Stack.Screen name="Detail" component={DetailScreen} options={{ headerShown: false, animation: "slide_from_bottom" }} />

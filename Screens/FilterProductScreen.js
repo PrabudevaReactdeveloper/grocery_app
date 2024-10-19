@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 const FilterProductScreen = ({ navigation }) => {
     const route = useRoute()
     const FilterData = route.params.item;
-    console.log(FilterData.id);
+    // console.log(FilterData.id);
 
     const { width } = Dimensions.get("screen");
     return (

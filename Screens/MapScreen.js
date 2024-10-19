@@ -136,12 +136,7 @@ const MapScreen = ({ navigation }) => {
                     longitudeDelta: 0,
                 }}
                 provider={PROVIDER_GOOGLE}
-                // zoom={1}
-                userInterfaceStyle={"dark"}
-                rotateEnabled={true}
                 zoomEnabled={true}
-                zoomControlEnabled={true}
-                showUserLocation={true}
                 onPress={coordinate => {
                     latRef.current = coordinate.nativeEvent.coordinate.latitude;
                     set_current_latitude(

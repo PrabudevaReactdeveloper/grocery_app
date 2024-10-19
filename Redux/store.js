@@ -4,8 +4,8 @@ import FavoriteScreenReducer from "../Redux/FavoriteSlice";
 import UserScreenReducer from "../Redux/UserSlice";
 export const store = configureStore({
     reducer: {
-        CartScreenReducer,
         FavoriteScreenReducer,
+        CartScreenReducer,
         User: UserScreenReducer
     }
 })

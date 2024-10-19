@@ -65,43 +65,51 @@ const AccountScreen = () => {
       id: 2,
       name: "My Details",
       img1: MyDetailIcon,
-      img: ChevronIcon
+      img: ChevronIcon,
+      route:"Order"
+
     },
     {
       id: 3,
       name: "Delivery Address",
       img1: MapIcon,
-      img: ChevronIcon
+      img: ChevronIcon,
+      route:"Order"
     },
     {
       id: 4,
       name: "Payment Methods",
       img1: PaymentIcon,
-      img: ChevronIcon
+      img: ChevronIcon,
+      route:"Order"
     },
     {
       id: 5,
       name: "Promo Card",
       img1: PromoCordIcon,
-      img: ChevronIcon
+      img: ChevronIcon,
+      route:"Order"
     },
     {
       id: 6,
       name: "Notifications",
       img1: NotificationIcon,
-      img: ChevronIcon
+      img: ChevronIcon,
+      route:"Order"
     },
     {
       id: 7,
       name: "Helps",
       img1: HelpIcon,
-      img: ChevronIcon
+      img: ChevronIcon,
+      route:"Order"
     },
     {
       id: 8,
       name: "Abouts",
       img1: AboutIcon,
-      img: ChevronIcon
+      img: ChevronIcon,
+      route:"Order"
     },
 
   ]

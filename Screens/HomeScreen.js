@@ -43,18 +43,6 @@ const HomeScreen = () => {
             img: Banner3
         }
     ]
-    const Item = ({ name, cost, id, thum, item }) => (
-        <View className="w-44 h-60 flex flex-col space-y-2 mr-3 rounded-xl border-2 shadow border-[#E2E2E2] p-3">
-            <Image className="w-full h-[50%] object-contain rounded-lg" source={{ uri: `https://storage.googleapis.com/p4uconsole/Products/${id}/${thum}` }} />
-            <Text>{name}</Text>
-            <Text>$ {cost}</Text>
-            <View className="flex flex-col items-end">
-                <Pressable onPress={() => navigation.navigate("Detail", { item })} className="bg-[#53B175] p-2 rounded-lg">
-                    <Image className="w-5 h-5 object-contain" source={Plus} />
-                </Pressable>
-            </View>
-        </View>
-    );
     const nav = useNavigation();
     const [CurrentLoc, setCurrentLoc] = useState(null)
     useEffect(() => {
@@ -63,10 +51,6 @@ const HomeScreen = () => {
             Geolocation.getCurrentPosition(info => {
                 autoFillAddress(info.coords.latitude, info.coords.longitude)
             })
-            // console.log(
-            //     getDistance({ latitude: 13.0861171, longitude: 80.1887673 },
-            //         { latitude: 13.0899419, longitude: 80.1972654 })
-            // );
 
         });
     }, [])
@@ -121,7 +105,7 @@ const HomeScreen = () => {
             </View>
             <View className="flex flex-col space-y-3 p-3 bg-white">
                 {/* <SearchPage /> */}
-                <ScrollView showsVerticalScrollIndicator={false} className="flex flex-col space-y-5 h-[86%]">
+                <ScrollView showsVerticalScrollIndicator={false} className="flex flex-col space-y-5 h-[95%]">
                     <View className="h-28 rounded-xl">
                         <Swiper showsButtons={false}>
                             {BannerImage.map((item, index) =>
@@ -150,28 +134,8 @@ const HomeScreen = () => {
                         </View>
                     </View>
                     <View className="flex flex-col space-y-3">
-                        <View className="w-full flex flex-row items-center justify-between">
-                            <FlatList horizontal showsHorizontalScrollIndicator={false}
-                                data={fruits1}
-                                renderItem={({ item, index }) => (
-                                    <TouchableOpacity onPress={() => nav.navigate("ProductDetail", { item })} activeOpacity={0.7} key={index} className="mr-3 border-2 border-[#E3E3E3]  rounded-2xl h-[248px] w-[173px]">
-                                        <View className="w-full h-[50%] flex flex-col items-center justify-center">
-                                            <Image className="w-[80%] h-[80%] object-contain rounded-t-2xl" source={item.img} />
-                                        </View>
-                                        <View className="p-2 flex flex-col space-y-1 h-[50%]">
-                                            <Text className="text-lg text-black font-PoppinsSemiBold">{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</Text>
-                                            <Text className="font-PoppinsSemiBold">{item.pieces}</Text>
-                                            <View className="flex flex-row items-center justify-between">
-                                                <Text className="font-PoppinsMedium">₹ {item.price}</Text>
-                                                <View className="bg-[#53B175] p-2 rounded-lg">
-                                                    <Image className="w-5 h-5 object-contain" source={Plus} />
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>
-                                )}
-                            />
-                        </View>
+                        <ProductTitle title="Meat Offer" />
+                        <ProductCard data={fruits1} />
                     </View>
                 </ScrollView>
             </View>

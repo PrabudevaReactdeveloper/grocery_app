@@ -7,13 +7,6 @@ const UserSlice = createSlice({
     reducers: {
         PlaceOrder: (state, action) => {
             state.value = action.payload
-            // let isAvailable = state.find((e) => e.name == action.payload.name);
-            // if (isAvailable) {
-            //     action.payload["quantity"] += 1
-            // }
-            // else {
-            //     state.push({ ...action.payload, quantity: 1 })
-            // }
         },
     }
 })

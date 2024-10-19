@@ -2,64 +2,62 @@
 
 
 
-import { View, Text, Dimensions, TouchableOpacity, Image, FlatList, Pressable } from 'react-native';
-import React from 'react';
-import PlusIcon from "../Assert/Plus.png";
-import MinusIcon from "../Assert/Minus.png";
-import CloseIcon from "../Assert/Close.png";
+import { View, Text, Dimensions, TouchableOpacity, Image, Pressable, ScrollView, Modal, Alert } from 'react-native';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { responsiveScreenHeight } from 'react-native-responsive-dimensions';
-import { DecrementFavoriteQuantity, IncremenFavoriteQuantity, RemoveFavoriteCart } from '../Redux/FavoriteSlice';
+import ChevronIcon from "../Assert/Chevron.png";
+import { AddtoCart } from '../Redux/CartSlice';
+import { PlaceOrder } from '../Redux/UserSlice';
 
-const FavouriteScreen = () => {
+const FavouriteScreen = ({ navigation }) => {
     const { width } = Dimensions.get("screen");
-    const FavouriteData = useSelector((val) => val.FavoriteScreenReducer);
-
+    const FavouriteData = useSelector((state) => state.FavoriteScreenReducer);
+    // console.log(FavouriteData);
+    const dispatch = useDispatch();
     return (
         <>
-            <View style={{ width: width, height: "100%" }} className="flex-1 bg-yellow-700">
+            <View style={{ width: width, height: "100%" }} className="flex-1 justify-between bg-white">
                 <View className="flex flex-col items-center justify-center border-b-2 border-[#E2E2E2] h-[10%] shadow-lg">
-                    <Text className="text-black text-2xl font-PoppinsSemiBold">My Favorite</Text>
+                    <Text className="text-[#181725] text-xl font-PoppinsSemiBold">Favorite</Text>
                 </View>
-
-                {/* <FlatList horizontal={false} showsVerticalScrollIndicator={false} className="h-[80%]"
-                    data={FavouriteData}
-                    renderItem={({ item1, index }) => (
-                        <View key={index} style={{ height: responsiveScreenHeight(15) }} className="flex flex-row items-center px-3 py-2 justify-between bg-yellow-700 border-b-2  border-[#E2E2E2]">
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    {FavouriteData.map((item, index) =>
+                        <View key={index} style={{ height: responsiveScreenHeight(12) }} className="flex flex-row items-center px-3 py-2 justify-between border-b-2  border-[#E2E2E2]">
                             <View className="flex flex-col items-center justify-center w-[30%] h-full">
-                                <Image className="w-full h-full object-center" source={item1.img} />
+                                <Image className="w-full h-full object-contain" source={item.img} />
                             </View>
-                            <View className=" flex flex-row items-center justify-between space-y-3 w-[75%] h-full px-3">
-                                <View className=" flex flex-col space-y-3">
-                                    <Text className="text-lg text-black font-semibold">{item1.name}</Text>
-                                    <Text>{item1.pieces}</Text>
-                                    <View className="flex flex-row  items-center space-x-3">
-                                        <TouchableOpacity onPress={() => dispatch(DecrementFavoriteQuantity(item1))} className="border-[1px] p-3 border-[#B3B3B3] rounded-xl" >
-                                            <Image style={{ tintColor: "#7C7C7C" }} className="w-5 h-5" source={MinusIcon} />
-                                        </TouchableOpacity>
-                                        <Text className="text-lg text-black font-semibold">{item1.quantity}</Text>
-                                        <TouchableOpacity onPress={() => dispatch(IncremenFavoriteQuantity(item1))} className="border-[1px] p-3 border-[#B3B3B3] rounded-xl" >
-                                            <Image style={{ tintColor: "#7C7C7C" }} className="w-5 h-5" source={PlusIcon} />
-                                        </TouchableOpacity>
-                                    </View>
+                            <View className=" flex flex-row items-center justify-between space-y-2 w-[70%] h-full px-3">
+                                <View className=" flex flex-col space-y-1">
+                                    <Text className="text-lg text-[#181725] font-PoppinsSemiBold">{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</Text>
+                                    <Text>{item.pieces} kg</Text>
                                 </View>
-                                <View className=" flex flex-col  items-center justify-between h-full">
-                                    <TouchableOpacity onPress={() => dispatch(RemoveFavoriteCart(item1))}>
-                                        <Image style={{ tintColor: "#7C7C7C" }} className="w-5 h-5" source={CloseIcon} />
+                                <View className="flex flex-row items-center space-x-2">
+                                    <Text className="text-sm text-[#181725] font-PoppinsMedium">₹ {item.price}</Text>
+                                    <TouchableOpacity onPress={() => {
+                                        dispatch(AddtoCart(item)); navigation.navigate("Cart")
+                                    }}>
+                                        <Image style={{ tintColor: "#181725" }} className="w-6 h-6" source={ChevronIcon} />
                                     </TouchableOpacity>
-                                    <Text className="text-lg text-black font-semibold">₹ {item1.price}</Text>
                                 </View>
                             </View>
+
                         </View>
                     )}
-                /> */}
+                </ScrollView>
+
                 <View className="h-[10%] flex flex-col justify-center px-5">
-                    <Pressable className="bg-[#53B175] flex flex-col items-center justify-center h-14 bottom-1 rounded-3xl" >
-                        <Text className="text-white font-bold text-base font-PoppinsSemiBold"> Go to Checkout</Text>
+                    {/* <Pressable onPress={() => { dispatch(AddtoCart()); navigation.navigate("Cart") }} className="bg-[#53B175] flex flex-row items-center justify-center space-x-5 h-[67px] bottom-1 rounded-xl px-3" >
+                        <Text className="text-white font-bold text-base font-PoppinsSemiBold"> Add All To Cart</Text>
+                    </Pressable> */}
+                    <Pressable onPress={() => {
+                        dispatch(PlaceOrder(2)); console.log(PlaceOrder(2));
+
+                    }} className="bg-[#53B175] flex flex-row items-center justify-center space-x-5 h-[67px] bottom-1 rounded-xl px-3" >
+                        <Text className="text-white font-bold text-base font-PoppinsSemiBold"> Add All To Cart</Text>
                     </Pressable>
                 </View>
             </View>
-
         </>
 
     )
